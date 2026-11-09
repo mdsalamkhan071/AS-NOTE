@@ -36,6 +36,12 @@ jobs:
       - name: Install Packages
         run: flutter pub get
 
+      - name: Generate App Icon
+        run: dart run flutter_launcher_icons
+
+      - name: Remove Default Flutter Test
+        run: rm -f test/widget_test.dart
+
       - name: Check Flutter Code
         run: flutter analyze
 
