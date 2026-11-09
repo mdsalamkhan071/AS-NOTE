@@ -4,8 +4,7 @@ name: Build AS NOTS Android
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [main]
 
 permissions:
   contents: read
@@ -33,17 +32,95 @@ jobs:
       - name: Create Android Project
         run: flutter create --project-name as_nots --org com.asnots --platforms=android .
 
+      - name: Install Image Tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pil
+
+      - name: Generate AS NOTS Logo
+        run: |
+          mkdir -p assets
+          python3 - <<'PY'
+          from PIL import Image, ImageDraw, ImageFont
+
+          size = 1024
+          img = Image.new("RGB", (size, size), "#071638")
+          d = ImageDraw.Draw(img)
+
+          # Rounded navy background
+          d.rounded_rectangle(
+              (25, 25, 999, 999),
+              radius=190,
+              fill="#071638",
+              outline="#3157D5",
+              width=12
+          )
+
+          # Notebook
+          d.rounded_rectangle(
+              (205, 150, 820, 730),
+              radius=75,
+              fill="#FF941A",
+              outline="#FFC04D",
+              width=12
+          )
+          d.rounded_rectangle(
+              (240, 245, 785, 710),
+              radius=35,
+              fill="#FFFFFF"
+          )
+
+          # Notebook rings
+          for x in (340, 475, 610, 745):
+              d.rounded_rectangle(
+                  (x-23, 105, x+23, 230),
+                  radius=22,
+                  fill="#D9E2F2",
+                  outline="#FFFFFF",
+                  width=5
+              )
+
+          # Writing lines
+          for y in (390, 470, 550, 630):
+              d.rounded_rectangle(
+                  (310, y, 700, y+9),
+                  radius=5,
+                  fill="#B9CBE8"
+              )
+
+          # AS lettering
+          font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+          big = ImageFont.truetype(font_path, 190)
+          small = ImageFont.truetype(font_path, 105)
+
+          d.text((345, 270), "AS", font=big, fill="#071638")
+
+          # Orange pen stroke
+          d.line((300, 535, 700, 350), fill="#FF941A", width=22)
+
+          # Brand name
+          d.text((160, 755), "AS", font=small, fill="#FFFFFF")
+          d.text((365, 755), "NOTS", font=small, fill="#FF941A")
+
+          # Underline
+          d.rounded_rectangle(
+              (250, 890, 775, 905),
+              radius=7,
+              fill="#FF941A"
+          )
+
+          img.save("assets/app_icon.png", format="PNG")
+          print("AS NOTS icon generated successfully")
+          PY
+
       - name: Install Packages
         run: flutter pub get
 
-      - name: Generate App Icon
+      - name: Generate Android App Icon
         run: dart run flutter_launcher_icons
 
       - name: Remove Default Flutter Test
         run: rm -f test/widget_test.dart
-
-      - name: Check Flutter Code
-        run: flutter analyze
 
       - name: Build APK
         run: flutter build apk --release
