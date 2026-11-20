@@ -5,10 +5,10 @@ import 'dart:convert';
 void main() => runApp(const AsNotsApp());
 
 class AsNotsApp extends StatelessWidget {
-  const AsNotsApp({super.key});
+  const NotesApp({super.key});
   @override
   Widget build(BuildContext context) => MaterialApp(
-    title: 'AS NOTS',
+    title: 'NOTES',
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3157D5)),
@@ -88,7 +88,7 @@ class _NotesHomeState extends State<NotesHome> {
   Widget build(BuildContext context) {
     final filtered = notes.where((n) => ('${n.title} ${n.body}').toLowerCase().contains(search.text.toLowerCase())).toList();
     return Scaffold(
-      appBar: AppBar(title: const Text('AS NOTS', style: TextStyle(fontWeight: FontWeight.bold)), centerTitle: false),
+      appBar: AppBar(title: const Text('NOTES', style: TextStyle(fontWeight: FontWeight.bold)), centerTitle: false),
       floatingActionButton: FloatingActionButton.extended(onPressed: () => openEditor(), icon: const Icon(Icons.add), label: const Text('New Note')),
       body: loading ? const Center(child: CircularProgressIndicator()) : Padding(
         padding: const EdgeInsets.all(16),
