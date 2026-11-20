@@ -11,7 +11,7 @@ GitHub पर सेटअप:
 2. इस ZIP की सभी फाइलें repository के root में upload करें। .github फोल्डर भी शामिल करें।
 3. GitHub Actions टैब खोलें और "Build NOTES Android" workflow चुनें।
 4. Run workflow दबाएं।
-5. Build पूरा होने पर Actions run खोलें -> Artifacts -> as-nots-release-apk डाउनलोड करें।
+5. Build पूरा होने पर Actions run खोलें -> Artifacts -> notes-release-apk डाउनलोड करें।
 
 स्थानीय build:
 flutter pub get
