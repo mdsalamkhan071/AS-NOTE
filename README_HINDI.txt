@@ -1,4 +1,4 @@
-AS NOTS - Flutter Android App
+NOTES- Flutter Android App
 
 इस शुरुआती संस्करण में:
 - नोट बनाना, खोलना, एडिट करना और डिलीट करना
@@ -7,9 +7,9 @@ AS NOTS - Flutter Android App
 - Login/Cloud Sync नहीं है; ऐप डेटा इसी डिवाइस पर रहेगा।
 
 GitHub पर सेटअप:
-1. GitHub में नया repository बनाएं: as-nots
+1. GitHub में नया repository बनाएं: notes
 2. इस ZIP की सभी फाइलें repository के root में upload करें। .github फोल्डर भी शामिल करें।
-3. GitHub Actions टैब खोलें और "Build AS NOTS Android" workflow चुनें।
+3. GitHub Actions टैब खोलें और "Build NOTES Android" workflow चुनें।
 4. Run workflow दबाएं।
 5. Build पूरा होने पर Actions run खोलें -> Artifacts -> as-nots-release-apk डाउनलोड करें।
 
@@ -18,7 +18,7 @@ flutter pub get
 flutter build apk --release
 
 Package ID:
-com.asnots.as_nots
+com.asnots. notes 
 
 Package ID (पहली Play Store upload के बाद इसे बदलना नहीं): com.asnots.as_nots\n\nPlay Store के लिए:
 - Play Console developer account बनाएं और one-time registration fee भरें।
