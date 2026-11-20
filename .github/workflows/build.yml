@@ -1,5 +1,5 @@
 
-name: Build AS NOTS Android
+name: Build NOTESAndroid
 
 on:
   workflow_dispatch:
@@ -37,7 +37,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3-pil
 
-      - name: Generate AS NOTS Logo
+      - name: Generate NOTES Logo
         run: |
           mkdir -p assets
           python3 - <<'PY'
@@ -88,19 +88,19 @@ jobs:
                   fill="#B9CBE8"
               )
 
-          # AS lettering
+          #lettering
           font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
           big = ImageFont.truetype(font_path, 190)
           small = ImageFont.truetype(font_path, 105)
 
-          d.text((345, 270), "AS", font=big, fill="#071638")
+          d.text((345, 270), "", font=big, fill="#071638")
 
           # Orange pen stroke
           d.line((300, 535, 700, 350), fill="#FF941A", width=22)
 
           # Brand name
-          d.text((160, 755), "AS", font=small, fill="#FFFFFF")
-          d.text((365, 755), "NOTS", font=small, fill="#FF941A")
+          d.text((160, 755), "NOTES", font=small, fill="#FFFFFF")
+          d.text((365, 755), "NOTES", font=small, fill="#FF941A")
 
           # Underline
           d.rounded_rectangle(
@@ -110,7 +110,7 @@ jobs:
           )
 
           img.save("assets/app_icon.png", format="PNG")
-          print("AS NOTS icon generated successfully")
+          print("NOTES icon generated successfully")
           PY
 
       - name: Install Packages
@@ -131,7 +131,7 @@ jobs:
       - name: Upload APK and AAB
         uses: actions/upload-artifact@v4
         with:
-          name: AS-NOTS-Release-Files
+          name: NOTES-Release-Files
           path: |
             build/app/outputs/flutter-apk/app-release.apk
             build/app/outputs/bundle/release/app-release.aab
